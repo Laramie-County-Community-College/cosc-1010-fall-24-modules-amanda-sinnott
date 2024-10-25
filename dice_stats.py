@@ -36,7 +36,25 @@ Make sure you have both dice_roller.py and dice_stats.py in the same directory.
 Run dice_stats.py. The program should prompt for input, roll the dice, and display the statistics.
 '''
 
+import dice_roller
 
+def main():
+    num_rolls = int(input("Enter the number of dice rolls: "))
+    sides = int(input("Enter the number of sides on the die: "))
+
+    roll_counts = {side: 0 for side in range(1, sides + 1)}
+
+    for _ in range(num_rolls):
+        roll = dice_roller.roll_die(sides)
+        roll_counts[roll] += 1
+    
+    print("\nSide\tRolls\tProbability (%)")
+    for side, count in roll_counts.items():
+        probability = (count / num_rolls) * 100
+        print(f"{side}\t{count}\t{probability: .2f}")
+
+if __name__ == "__main__":
+    main()
 
 
 def main():
